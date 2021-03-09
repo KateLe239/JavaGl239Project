@@ -71,4 +71,27 @@ public class Figures {
             gl.glEnd();
         }
     }
+
+    public static void renderCircle(GL2 gl, Vector2 pos, double rad, boolean filled) {
+        gl.glLineWidth(1);
+        gl.glBegin(GL.GL_LINE_LOOP);
+        gl.glColor3d(1, 0, 0);
+        for(int i = 0; i < 256; i++){
+            gl.glVertex2d(pos.x + Math.sin(Math.PI/256*(256 - i))*rad, pos.y + Math.cos(Math.PI/256*(256 - i))*rad);
+        }
+        for(int i = 0; i < 256; i++){
+            gl.glVertex2d(pos.x - Math.sin(Math.PI/256*i)*rad, pos.y + Math.cos(Math.PI/256*i)*rad);
+        }
+        for(int i = 0; i < 256; i++){
+            gl.glVertex2d(pos.x - Math.sin(Math.PI/256*(256 - i))*rad, pos.y - Math.cos(Math.PI/256*(256 - i))*rad);
+        }
+        for(int i = 0; i < 256; i++){
+            gl.glVertex2d(pos.x + Math.sin(Math.PI/256*i)*rad, pos.y - Math.cos(Math.PI/256*i)*rad);
+        }
+
+        gl.glEnd();
+    }
+
+
+
 }

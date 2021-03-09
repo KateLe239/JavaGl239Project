@@ -137,7 +137,6 @@ public class Problem {
 //        gl.glColor3d(0.5, 0, 0.3);
 //        Figures.renderPoint(gl,new Vector2(-0.5,-0.2),3);
 //        Figures.renderPoint(gl,new Vector2(0.1,0.2),1);
-        Figures.renderQuad(gl,new Vector2(0,0),new Vector2(0,-1),new Vector2(-1,-1), new Vector2(-1,0),false);
-        Figures.renderQuad(gl,new Vector2(0,0),new Vector2(0,1),new Vector2(1,1), new Vector2(1,0),true);
+        Figures.renderCircle(gl, new Vector2(0, 0), 1, false);
     }
 }
