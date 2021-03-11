@@ -1,5 +1,6 @@
 package problem;
 
+import  java.util.Random;
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
 
@@ -73,23 +74,53 @@ public class Figures {
     }
 
     public static void renderCircle(GL2 gl, Vector2 pos, double rad, boolean filled) {
-        gl.glLineWidth(1);
-        gl.glBegin(GL.GL_LINE_LOOP);
-        gl.glColor3d(1, 0, 0);
-        for(int i = 0; i < 256; i++){
-            gl.glVertex2d(pos.x + Math.sin(Math.PI/256*(256 - i))*rad, pos.y + Math.cos(Math.PI/256*(256 - i))*rad);
-        }
-        for(int i = 0; i < 256; i++){
-            gl.glVertex2d(pos.x - Math.sin(Math.PI/256*i)*rad, pos.y + Math.cos(Math.PI/256*i)*rad);
-        }
-        for(int i = 0; i < 256; i++){
-            gl.glVertex2d(pos.x - Math.sin(Math.PI/256*(256 - i))*rad, pos.y - Math.cos(Math.PI/256*(256 - i))*rad);
-        }
-        for(int i = 0; i < 256; i++){
-            gl.glVertex2d(pos.x + Math.sin(Math.PI/256*i)*rad, pos.y - Math.cos(Math.PI/256*i)*rad);
+        if(!filled){
+            gl.glLineWidth(1);
+            gl.glBegin(GL.GL_LINE_LOOP);
+            double a, b, c;
+
+            Random random = new Random();
+            a = (double)random.nextInt(100)/100;
+
+            Random random1 = new Random();
+            b = (double)random1.nextInt(100)/100;
+
+            Random random2 = new Random();
+            c = (double)random2.nextInt(100)/100;
+            gl.glColor3d(a, b, c);
+
+            for(int i = 0; i < 256; i++){
+                gl.glVertex2d(pos.x + Math.sin(Math.PI/512*i)*rad, pos.y - Math.cos(Math.PI/512*i)*rad);
+
+            }
+            for(int i = 0; i < 256; i++){
+                gl.glVertex2d(pos.x + Math.sin(Math.PI/512*(256 - i))*rad, pos.y + Math.cos(Math.PI/512*(256 - i))*rad);
+            }
+            for(int i = 0; i < 256; i++){
+                gl.glVertex2d(pos.x - Math.sin(Math.PI/512*i)*rad, pos.y + Math.cos(Math.PI/512*i)*rad);
+            }
+
+            for(int i = 0; i < 256; i++){
+                gl.glVertex2d(pos.x - Math.sin(Math.PI/512*(256 - i))*rad, pos.y - Math.cos(Math.PI/512*(256 - i))*rad);
+            }
+            gl.glEnd();
+
+
+
         }
 
-        gl.glEnd();
+        else{
+            double theta;
+            double step = 1;
+            gl.glBegin(GL.GL_TRIANGLE_FAN);
+            for(double a=0; a<360; a += step) {
+                theta = 2 * Math.PI * a / 180;
+                gl.glColor3d((360 - a)/360, 0, a/360);
+                gl.glVertex3d(rad * Math.cos(theta), rad * Math.sin(theta), 0);
+            }
+            gl.glEnd();
+
+        }
     }
 
 

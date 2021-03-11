@@ -1,4 +1,5 @@
 package problem;
+import  java.util.Random;
 
 import javax.media.opengl.GL2;
 import java.io.*;
@@ -31,11 +32,14 @@ public class Problem {
      */
     private ArrayList<Point> points;
 
+    private ArrayList<Circle> circles;
+
     /**
      * Конструктор класса задачи
      */
     public Problem() {
         points = new ArrayList<>();
+        circles = new ArrayList<>();
     }
 
     /**
@@ -113,8 +117,8 @@ public class Problem {
      */
     public void addRandomPoints(int n) {
         for (int i = 0; i < n; i++) {
-            Point p = Point.getRandomPoint();
-            points.add(p);
+            Circle p = Circle.getRandomCircle();
+            circles.add(p);
         }
     }
 
@@ -123,6 +127,7 @@ public class Problem {
      */
     public void clear() {
         points.clear();
+        circles.clear();
     }
 
     /**
@@ -131,12 +136,23 @@ public class Problem {
      * @param gl переменная OpenGL для рисования
      */
     public void render(GL2 gl) {
-//        for (Point point : points) {
-//            point.render(gl);
-//        }
+        for (Circle circle : circles) {
+            circle.render(gl);
+        }
 //        gl.glColor3d(0.5, 0, 0.3);
 //        Figures.renderPoint(gl,new Vector2(-0.5,-0.2),3);
 //        Figures.renderPoint(gl,new Vector2(0.1,0.2),1);
-        Figures.renderCircle(gl, new Vector2(0, 0), 1, false);
+
+
+//        for(int i = 0; i < 200; i++){
+//           Circle circle = Circle.getRandomCircle();
+//           circle.render(gl);
+//        }
+        double rad, x = 0, y = 0;
+        for(int i = 0; i < 200; i++){
+            Random random = new Random();
+            rad = random.nextDouble();
+            Figures.renderCircle(gl, new Vector2(0,0), rad, false);
+        }
     }
 }
