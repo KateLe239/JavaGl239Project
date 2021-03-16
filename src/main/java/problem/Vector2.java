@@ -7,6 +7,10 @@ class Vector2 {
         y = 0;
     }
 
+    public double distanceTo(Vector2 p) {
+        return Math.sqrt((this.x - p.x) * (this.x - p.x) + (this.y - p.y) * (this.y - p.y));
+    }
+
     public Vector2(double x, double y) {
         this.x =x ;
         this.y = y;

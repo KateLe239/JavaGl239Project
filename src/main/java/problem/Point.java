@@ -60,6 +60,8 @@ public class Point {
         return new Point(nx, ny, nSetVal);
     }
 
+
+
     /**
      * Рисование точки
      *

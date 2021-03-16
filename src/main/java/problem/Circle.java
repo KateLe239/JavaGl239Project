@@ -18,9 +18,21 @@ public class Circle {
 
     public static Circle getRandomCircle() {
         Random random = new Random();
-        double rad = random.nextDouble();
+        double rad = random.nextDouble() * 0.3;
         double x = random.nextDouble() * 2 - 1;
         double y = random.nextDouble() * 2 - 1;
         return new Circle(new Vector2(x, y), rad);
+    }
+
+    public double OLength(Circle w) {
+        if (pos.distanceTo(w.pos) > rad + w.rad) {
+            return 0;
+        }
+        else if (pos.distanceTo(w.pos) == rad + w.rad) {
+            return 1;
+        }
+        else{
+
+        }
     }
 }

@@ -14,13 +14,15 @@ public class Problem {
      * текст задачи
      */
     public static final String PROBLEM_TEXT = "ПОСТАНОВКА ЗАДАЧИ:\n" +
-            "Заданы два множества точек в пространстве.\n" +
-            "Требуется построить пересечения и разность этих множеств";
+            "На плоскости задано множество окружностей. \n" +
+            "Найти такую пару пересекающихся окружностей,  \n" +
+            "что длина отрезка, проведенного от одной точки  \n" +
+            "пересечения этих двух окружностей до другой, максимальна.";
 
     /**
      * заголовок окна
      */
-    public static final String PROBLEM_CAPTION = "Итоговый проект ученика 10-7 Иванова Ивана";
+    public static final String PROBLEM_CAPTION = "Итоговый проект ученицы 10-1 Катирины Ле";
 
     /**
      * путь к файлу
@@ -148,11 +150,11 @@ public class Problem {
 //           Circle circle = Circle.getRandomCircle();
 //           circle.render(gl);
 //        }
-        double rad, x = 0, y = 0;
-        for(int i = 0; i < 200; i++){
-            Random random = new Random();
-            rad = random.nextDouble();
-            Figures.renderCircle(gl, new Vector2(0,0), rad, false);
-        }
+  //      double rad, x = 0, y = 0;
+    //    for(int i = 0; i < 200; i++){
+      //      Random random = new Random();
+        //    rad = random.nextDouble();
+          //  Figures.renderCircle(gl, new Vector2(0,0), rad, false);
+        //}
     }
 }
