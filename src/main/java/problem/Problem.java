@@ -79,7 +79,7 @@ public class Problem {
      * Загрузить задачу из файла
      */
     public void loadFromFile() {
-        points.clear();
+        circles.clear();
         try {
             File file = new File(FILE_NAME);
             Scanner sc = new Scanner(file);
@@ -87,10 +87,13 @@ public class Problem {
             while (sc.hasNextLine()) {
                 double x = sc.nextDouble();
                 double y = sc.nextDouble();
+                double rad = sc.nextDouble();
                 int setVal = sc.nextInt();
+                Vector2 pos = new Vector2(x, y);
+
                 sc.nextLine();
-                Point point = new Point(x, y, setVal);
-                points.add(point);
+                Circle circle = new Circle(pos, rad);
+                circles.add(circle);
             }
         } catch (Exception ex) {
             System.out.println("Ошибка чтения из файла: " + ex);
