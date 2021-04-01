@@ -1,5 +1,6 @@
 package problem;
-import  java.util.Random;
+
+import java.util.Random;
 
 import javax.media.opengl.GL2;
 import java.io.*;
@@ -36,6 +37,12 @@ public class Problem {
 
     private ArrayList<Circle> circles;
 
+    private Circle resultCircle1;
+    private Circle resultCircle2;
+
+    Vector2 posA;
+    Vector2 posB;
+
     /**
      * Конструктор класса задачи
      */
@@ -59,19 +66,34 @@ public class Problem {
     /**
      * Решить задачу
      */
+
     public void solve() {
-        // перебираем пары точек
-        for (Point p : points) {
-            for (Point p2 : points) {
-                // если точки являются разными
-                if (p != p2) {
-                    // если координаты у них совпадают
-                    if (Math.abs(p.x - p2.x) < 0.0001 && Math.abs(p.y - p2.y) < 0.0001) {
-                        p.isSolution = true;
-                        p2.isSolution = true;
-                    }
+        Vector2 t1 = new Vector2(0, 0);
+        Vector2 t2 = new Vector2(0, 0);
+        double rad1 = 0;
+        double rad2 = 0;
+        double maxLength = -1;
+
+        // перебираем пары кругов
+        for (Circle c : circles) {
+            for (Circle c2 : circles) {
+                if (c.OLength(c2) > maxLength) {
+                    t1 = c.pos;
+                    t2 = c2.pos;
+                    rad1 = c.rad;
+                    rad2 = c2.rad;
+                    maxLength = c.OLength(c2);
+                    posA  = new Vector2(0.0,0.0);
+                    posB  = new Vector2(0.1,0.3);
                 }
             }
+        }
+        if (maxLength == -1) {
+
+        } else {
+            resultCircle1 = new Circle(t1, rad1);
+            resultCircle2 = new Circle(t2, rad2);
+
         }
     }
 
@@ -88,7 +110,6 @@ public class Problem {
                 double x = sc.nextDouble();
                 double y = sc.nextDouble();
                 double rad = sc.nextDouble();
-                int setVal = sc.nextInt();
                 Vector2 pos = new Vector2(x, y);
 
                 sc.nextLine();
@@ -106,8 +127,8 @@ public class Problem {
     public void saveToFile() {
         try {
             PrintWriter out = new PrintWriter(new FileWriter(FILE_NAME));
-            for (Point point : points) {
-                out.printf("%.2f %.2f %d\n", point.x, point.y, point.setNumber);
+            for (Circle circle : circles) {
+                out.printf("%.2f %.2f %.2f\n", circle.pos.x, circle.pos.y, circle.rad);
             }
             out.close();
         } catch (IOException ex) {
@@ -133,6 +154,10 @@ public class Problem {
     public void clear() {
         points.clear();
         circles.clear();
+        resultCircle1 = null;
+        resultCircle2 = null;
+        posA = null;
+        posB = null;
     }
 
     /**
@@ -141,23 +166,16 @@ public class Problem {
      * @param gl переменная OpenGL для рисования
      */
     public void render(GL2 gl) {
-        for (Circle circle : circles) {
+        gl.glColor3d(1, 0, 0);
+        for (Circle circle : circles)
             circle.render(gl);
+        gl.glColor3d(0, 1, 0);
+        if (resultCircle1 != null) {
+            resultCircle1.render(gl);
+            resultCircle2.render(gl);
         }
-//        gl.glColor3d(0.5, 0, 0.3);
-//        Figures.renderPoint(gl,new Vector2(-0.5,-0.2),3);
-//        Figures.renderPoint(gl,new Vector2(0.1,0.2),1);
-
-
-//        for(int i = 0; i < 200; i++){
-//           Circle circle = Circle.getRandomCircle();
-//           circle.render(gl);
-//        }
-  //      double rad, x = 0, y = 0;
-    //    for(int i = 0; i < 200; i++){
-      //      Random random = new Random();
-        //    rad = random.nextDouble();
-          //  Figures.renderCircle(gl, new Vector2(0,0), rad, false);
-        //}
+        if (posA != null) {
+            Figures.renderLine(gl, posA, posB, 3);
+        }
     }
 }

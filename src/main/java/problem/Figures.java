@@ -87,7 +87,7 @@ public class Figures {
 
             Random random2 = new Random();
             c = (double)random2.nextInt(100)/100;
-            gl.glColor3d(a, b, c);
+            //gl.glColor3d(a, b, c);
 
             for(int i = 0; i < 256; i++){
                 gl.glVertex2d(pos.x + Math.sin(Math.PI/512*i)*rad, pos.y - Math.cos(Math.PI/512*i)*rad);
