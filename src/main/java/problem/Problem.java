@@ -85,6 +85,8 @@ public class Problem {
                     maxLength = c.OLength(c2);
                     posA  = new Vector2(0.0,0.0);
                     posB  = new Vector2(0.1,0.3);
+                    posA  = c.A(c2);
+                    posB  = c.B(c2);
                 }
             }
         }
