@@ -39,6 +39,7 @@ public class Problem {
 
     private Circle resultCircle1;
     private Circle resultCircle2;
+    private int solve;
 
     Vector2 posA;
     Vector2 posB;
@@ -68,6 +69,9 @@ public class Problem {
      */
 
     public void solve() {
+        solve = 0;
+        resultCircle1 = null;
+        resultCircle2 = null;
         Vector2 t1 = new Vector2(0, 0);
         Vector2 t2 = new Vector2(0, 0);
         double rad1 = 0;
@@ -75,26 +79,33 @@ public class Problem {
         double maxLength = -1;
 
         // перебираем пары кругов
-        for (Circle c : circles) {
-            for (Circle c2 : circles) {
-                if (c.OLength(c2) > maxLength) {
-                    t1 = c.pos;
-                    t2 = c2.pos;
-                    rad1 = c.rad;
-                    rad2 = c2.rad;
+        for (int i = 0; i < circles.size(); i++) {
+            for (int j = i + 1; j < circles.size(); j++) {
+                Circle c = circles.get(i);
+                Circle c2 = circles.get(j);
+
+                if (!Double.isNaN(c.OLength(c2)) && c.OLength(c2) > maxLength && !c.pos.equals(c2.pos)) {
+                    System.out.println(c.OLength(c2));
+                    resultCircle1 = c;
+                    resultCircle2 = c2;
+//                    t1 = c.pos;
+//                    t2 = c2.pos;
+//                    rad1 = c.rad;
+//                    rad2 = c2.rad;
                     maxLength = c.OLength(c2);
-                    posA  = new Vector2(0.0,0.0);
-                    posB  = new Vector2(0.1,0.3);
-                    posA  = c.A(c2);
-                    posB  = c.B(c2);
+
+//                    posA = new Vector2(0.0, 0.0);
+//                    posB = new Vector2(0.1, 0.3);
+                    posA = c.A(c2);
+                    posB = c.B(c2);
                 }
             }
         }
         if (maxLength == -1) {
-
+            solve = 1;
         } else {
-            resultCircle1 = new Circle(t1, rad1);
-            resultCircle2 = new Circle(t2, rad2);
+//            resultCircle1 = new Circle(t1, rad1);
+//            resultCircle2 = new Circle(t2, rad2);
 
         }
     }
@@ -160,6 +171,7 @@ public class Problem {
         resultCircle2 = null;
         posA = null;
         posB = null;
+        solve = 0;
     }
 
     /**
@@ -178,6 +190,9 @@ public class Problem {
         }
         if (posA != null) {
             Figures.renderLine(gl, posA, posB, 3);
+        }
+        if (solve == 1) {
+            Figures.renderPoint(gl, new Vector2(0, 0), 10);
         }
     }
 }
