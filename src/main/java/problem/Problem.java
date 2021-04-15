@@ -86,12 +86,15 @@ public class Problem {
 
                 if (!Double.isNaN(c.OLength(c2)) && c.OLength(c2) > maxLength && !c.pos.equals(c2.pos)) {
                     System.out.println(c.OLength(c2));
+                    System.out.println(c2.OLength(c));
                     resultCircle1 = c;
                     resultCircle2 = c2;
 //                    t1 = c.pos;
 //                    t2 = c2.pos;
 //                    rad1 = c.rad;
 //                    rad2 = c2.rad;
+                    System.out.println(c.rad);
+                    System.out.println(c2.rad);
                     maxLength = c.OLength(c2);
 
 //                    posA = new Vector2(0.0, 0.0);

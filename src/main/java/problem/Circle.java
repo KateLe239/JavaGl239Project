@@ -34,14 +34,16 @@ public class Circle {
         else{
             double a = 2*(w.pos.x - pos.x);
             double b = 2*(w.pos.y - pos.y);
-            double c = -(w.rad*w.rad - rad*rad + pos.x * pos.x - w.pos.x * w.pos.x + pos.y * pos.y - w.pos.y * w.pos.y);
-            double a0 = 1 + a*a/b/b,  b0 = -2*pos.x + 2*a*c/b/b + 2*pos.y*a/b, c0 = pos.x*pos.x + c*c/b/b + 2*pos.y*a/b;
+            double c = w.rad*w.rad - rad*rad + pos.x * pos.x - w.pos.x * w.pos.x + pos.y * pos.y - w.pos.y * w.pos.y;
+            double a0 = 1 + a*a/b/b,  b0 = -2*pos.x + 2*a*c/b/b + 2*pos.y*a/b, c0 = pos.x*pos.x + c*c/b/b + 2*pos.y*a/b + pos.y*pos.y - rad*rad;
             double ax,ay,bx,by;
             ax = -b0/a0/2 + Math.sqrt(b0*b0 - 4*a0*c0)/2/a0;
             bx = -b0/a0/2 - Math.sqrt(b0*b0 - 4*a0*c0)/2/a0;
             ay = -(a*ax + c)/b;
             by = -(a*bx + c)/b;
             return Math.sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by));
+
+
 
         }
     }
