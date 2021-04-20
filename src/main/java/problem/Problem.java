@@ -144,7 +144,7 @@ public class Problem {
         try {
             PrintWriter out = new PrintWriter(new FileWriter(FILE_NAME));
             for (Circle circle : circles) {
-                out.printf("%.2f %.2f %.2f\n", circle.pos.x, circle.pos.y, circle.rad);
+                out.printf("%.8f %.8f %.8f\n", circle.pos.x, circle.pos.y, circle.rad);
             }
             out.close();
         } catch (IOException ex) {
